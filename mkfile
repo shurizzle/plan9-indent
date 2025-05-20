@@ -64,7 +64,7 @@ $O.indent: $OFILES
 install-bin:V: /$objtype/bin/indent
 
 /sys/man/1/indent: indent-$VERSION/man/indent.1
-	cp $prereq $target
+	sed 's/\$HOME/$home/g' $prereq > $target
 
 install-man:V: /sys/man/1/indent
 

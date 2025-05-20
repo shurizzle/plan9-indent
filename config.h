@@ -211,3 +211,10 @@
 /* #undef const */
 
 #define LOCALEDIR "/lib/locale"
+
+#include <stdlib.h>
+#define getenv(n)                                                              \
+	((n) && (n)[0] == 'H' && (n)[1] == 'O' && (n)[2] == 'M' &&                   \
+			(n)[3] == 'E' && (n)[4] == 0                                             \
+		? (getenv)("home")                                                         \
+		: (getenv)(n))
