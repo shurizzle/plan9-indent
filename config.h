@@ -192,6 +192,10 @@
 # define _REENTRANT_SOURCE 1
 #endif
 
+#ifndef PROFILE_FORMAT
+# define PROFILE_FORMAT "%s/lib/%s"
+#endif
+
 /* Version number of package */
 #define VERSION "2.2.13"
 
