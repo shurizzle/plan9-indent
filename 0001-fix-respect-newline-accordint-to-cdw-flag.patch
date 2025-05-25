@@ -1,0 +1,23 @@
+diff --git a/src/indent.c b/src/indent.c
+index b2fb341..5edba38 100644
+--- a/src/indent.c
++++ b/src/indent.c
+@@ -322,8 +322,14 @@ static BOOLEAN search_brace(
+                  *last_else) ||
+                 ((*type_code == sp_else)  &&     /* "else" statement */
+                  (e_code != s_code) && (e_code[-1] == '}') &&      /* The "else" follows '}' */
+-                 (save_com.end == save_com.ptr)))                  /* And we haven't found an 
++                 (save_com.end == save_com.ptr)) ||                /* And we haven't found an 
+                                                                     * intervening comment. */
++                 (*type_code == sp_paren && *token == 'w' &&     /* "while" statement */
++                    (e_code != s_code) && (e_code[-1] == '}') && /* The "while" follows '}' */
++                    (save_com.end == save_com.ptr) &&            /* And we haven't found an 
++                                                                  * intervening comment. */
++                    /* And it belongs to a do-while statement */
++                    parser_state_tos->p_stack[parser_state_tos->tos] == dohead))
+             {
+                 *force_nl = false;
+             }
+-- 
+2.49.0
+

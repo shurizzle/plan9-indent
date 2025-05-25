@@ -1,0 +1,837 @@
+diff --git a/doc/indent.texi b/doc/indent.texi
+index b8c5dac..549f070 100644
+--- a/doc/indent.texi
++++ b/doc/indent.texi
+@@ -358,6 +358,7 @@ error.  Option settings which correspond to the GNU style are:
+ -nbad -bap -nbc -bbo -bl -bli2 -bls -ncdb -nce -cp1 -cs -di2
+ -ndj -nfc1 -nfca -hnl -i2 -ip5 -lp -pcs -nprs -psl -saf -sai
+ -saw -nsc -nsob -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ @end group
+ @end example
+ 
+@@ -383,6 +384,7 @@ of options:
+ -nbad -bap -bbo -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0
+ -cp33 -cs -d0 -di1 -nfc1 -nfca -hnl -i4 -ip0 -l75 -lp -npcs
+ -nprs -npsl -saf -sai -saw -nsc -nsob -nss -par -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ @end group
+ @end example
+ 
+@@ -405,6 +407,7 @@ long option name).  This style is equivalent to the following settings:
+ -nbad -nbap -bbo -bc -br -brs -c33 -cd33 -cdb -ce -ci4 -cli0
+ -cp33 -di16 -fc1 -fca -hnl -i4 -ip4 -l75 -lp -npcs -nprs -psl
+ -saf -sai -saw -sc -nsob -nss -ts8 -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ @end group
+ @end example
+ 
+@@ -420,6 +423,7 @@ This style is equivalent to the following settings:
+ -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4 
+ -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai
+ -saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1 -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ @end group
+ @end example
+ 
+@@ -1003,6 +1007,28 @@ and the following parenthesis.  This is the default.
+ The @option{-saw} option forces a space between a @code{while}
+ and the following parenthesis.  This is the default.
+ 
++@kindex -sad
++@kindex --space-after-do
++@kindex -nsad
++@kindex --no-space-after-do
++The @option{-sad} option forces a space between a @code{do}
++and the following @samp{@{}.  This is the default.
++
++@kindex -sae
++@kindex --space-after-else
++@kindex -nsae
++@kindex --no-space-after-else
++The @option{-sae} option forces a space between an @code{else}
++and the following @samp{@{}.  This is the default.
++
++@kindex -safd
++@kindex --space-after-func-def
++@kindex -nsafd
++@kindex --no-space-after-func-def
++The @option{-safd} option forces a space between the @samp{)}
++and the following @samp{@{} in a function definition statement.
++This is the default.
++
+ @kindex -sas
+ @kindex --space-after-switch
+ @kindex -nsas
+@@ -1010,6 +1036,60 @@ and the following parenthesis.  This is the default.
+ The @option{-sas} option forces a space between a @code{switch}
+ and the following parenthesis.  This is the default.
+ 
++@kindex -sbb
++@kindex --space-before-brace
++@kindex -nsbb
++@kindex --no-space-before-brace
++The @option{-sbb} option forces a space between the @samp{)}
++and the following @samp{@{}.  This is the default.
++
++@kindex -sbe
++@kindex --space-before-else
++@kindex -nsbe
++@kindex --no-space-before-else
++The @option{-sbe} option forces a space between the @samp{@}}
++and the following @code{else}.  This is the default.
++
++@kindex -sbfb
++@kindex --space-before-for-block
++@kindex -nsbfb
++@kindex --no-space-before-for-block
++The @option{-sbfb} option forces a space between the @samp{)}
++and the following @samp{@{} in a @code{for} statement.
++This is the default.
++
++@kindex -sbib
++@kindex --space-before-if-block
++@kindex -nsbib
++@kindex --no-space-before-if-block
++The @option{-sbib} option forces a space between the @samp{)}
++and the following @samp{@{} in a @code{if} statement.
++This is the default.
++
++@kindex -sbsb
++@kindex --space-before-switch-block
++@kindex -nsbsb
++@kindex --no-space-before-switch-block
++The @option{-sbsb} option forces a space between the @samp{)}
++and the following @samp{@{} in a @code{switch} statement.
++This is the default.
++
++@kindex -sbwb
++@kindex --space-before-while-block
++@kindex -nsbwb
++@kindex --no-space-before-while-block
++The @option{-sbwb} option forces a space between the @samp{)}
++and the following @samp{@{} in a @code{while} statement.
++This is the default.
++
++@kindex -sbw
++@kindex --space-before-while
++@kindex -nsbw
++@kindex --no-space-before-while
++The @option{-sbw} option forces a space between the @samp{@}}
++and the following @code{while} in a @code{do}-@code{while} statement.
++This is the default.
++
+ @kindex -prs
+ @kindex --space-after-parentheses
+ The @option{-prs} option causes all parentheses to be separated with
+@@ -2177,11 +2257,61 @@ Do not put a space after every @code{if}.@*
+ Do not put a space after every @code{while}.@*
+ @xref{Statements}.
+ 
++@item -nsad
++@itemx --no-space-after-do
++Do not put a space after every @code{do}.@*
++@xref{Statements}.
++
++@item -nsae
++@itemx --no-space-after-else
++Do not put a space after every @code{else}.@*
++@xref{Statements}.
++
++@item -nsafd
++@itemx --no-space-after-func-def
++Do not put a space after every function definition.@*
++@xref{Statements}.
++
+ @item -nsas
+ @itemx --no-space-after-switch
+ Do not put a space after every @code{switch}.@*
+ @xref{Statements}.
+ 
++@item -nsbb
++@itemx --no-space-before-brace
++Do not put a space before every @samp{@{}.@*
++@xref{Statements}.
++
++@item -nsbe
++@itemx --no-space-before-else
++Do not put a space before every @code{else}.@*
++@xref{Statements}.
++
++@item -nsbfb
++@itemx --no-space-before-for-block
++Do not put a space before every @code{for} body block.@*
++@xref{Statements}.
++
++@item -nsbib
++@itemx --no-space-before-if-block
++Do not put a space before every @code{if} body block.@*
++@xref{Statements}.
++
++@item -nsbsb
++@itemx --no-space-before-switch-block
++Do not put a space before every @code{switch} body block.@*
++@xref{Statements}.
++
++@item -nsbwb
++@itemx --no-space-before-while-block
++Do not put a space before every @code{while} body block.@*
++@xref{Statements}.
++
++@item -nsbw
++@itemx --no-space-before-while
++Do not put a space before every @code{while} in @code{do}-@code{block}.@*
++@xref{Statements}.
++
+ @item -nsc
+ @itemx --dont-star-comments
+ Do not put the @samp{*} character at the left of comments.@*
+@@ -2285,11 +2415,61 @@ Put a space after the @samp{@{} and before the @samp{@}} in initializers.@*
+ Put a space after each @code{while}.@*
+ @xref{Statements}.
+ 
++@item -sad
++@itemx --space-after-do
++Put a space after every @code{do}.@*
++@xref{Statements}.
++
++@item -sae
++@itemx --space-after-else
++Put a space after every @code{else}.@*
++@xref{Statements}.
++
++@item -safd
++@itemx --space-after-func-def
++Put a space after every function definition.@*
++@xref{Statements}.
++
+ @item -sas
+ @itemx --space-after-switch
+ Put a space after each @code{switch}.@*
+ @xref{Statements}.
+ 
++@item -sbb
++@itemx --space-before-brace
++Put a space before every @samp{@{}.@*
++@xref{Statements}.
++
++@item -sbe
++@itemx --space-before-else
++Put a space before every @code{else}.@*
++@xref{Statements}.
++
++@item -sbfb
++@itemx --space-before-for-block
++Put a space before every @code{for} body block.@*
++@xref{Statements}.
++
++@item -sbib
++@itemx --space-before-if-block
++Put a space before every @code{if} body block.@*
++@xref{Statements}.
++
++@item -sbsb
++@itemx --space-before-switch-block
++Put a space before every @code{switch} body block.@*
++@xref{Statements}.
++
++@item -sbwb
++@itemx --space-before-while-block
++Put a space before every @code{while} body block.@*
++@xref{Statements}.
++
++@item -sbw
++@itemx --space-before-while
++Put a space before every @code{while} in @code{do}-@code{block}.@*
++@xref{Statements}.
++
+ @item -sbi@var{n}
+ @itemx --struct-brace-indentation@var{n}
+ Indent braces of a struct, union or enum N spaces.@*
+@@ -2426,7 +2606,17 @@ the corresponding short option.
+ \line{ --no-space-after-if \leaderfill             -nsai}
+ \line{ --no-space-after-parentheses \leaderfill          -nprs}
+ \line{ --no-space-after-while \leaderfill             -nsaw}
++\line{ --no-space-after-do \leaderfill                -nsad\ }
++\line{ --no-space-after-else \leaderfill              -nsae\ }
++\line{ --no-space-after-func-def \leaderfill          -nsafd\ }
+ \line{ --no-space-after-switch \leaderfill            -nsas}
++\line{ --no-space-before-brace \leaderfill            -nsbb\ }
++\line{ --no-space-before-else \leaderfill             -nsbe\ }
++\line{ --no-space-before-for-block \leaderfill        -nsbfb\ }
++\line{ --no-space-before-if-block \leaderfill         -nsbib\ }
++\line{ --no-space-before-switch-block \leaderfill     -nsbsb\ }
++\line{ --no-space-before-while-block \leaderfill      -nsbwb\ }
++\line{ --no-space-before-while \leaderfill            -nsbw\ }
+ \line{ --no-tabs \leaderfill                            -nut\ \ } 
+ \line{ --no-verbosity \leaderfill                       -nv\ \ }
+ \line{ --original \leaderfill                      -orig}
+@@ -2443,7 +2633,17 @@ the corresponding short option.
+ \line{ --space-after-parentheses \leaderfill       -prs\ }
+ \line{ --space-after-procedure-calls \leaderfill   -pcs\ }  
+ \line{ --space-after-while \leaderfill             -saw\ }
++\line{ --space-after-do \leaderfill                -sad }
++\line{ --space-after-else \leaderfill              -sae }
++\line{ --space-after-func-def \leaderfill          -safd\ }
+ \line{ --space-after-switch \leaderfill            -sas\ }
++\line{ --space-before-brace \leaderfill            -sbb\ }
++\line{ --space-before-else \leaderfill             -sbe\ }
++\line{ --space-before-for-block \leaderfill        -sbfb\ }
++\line{ --space-before-if-block \leaderfill         -sbib\ }
++\line{ --space-before-switch-block \leaderfill     -sbsb\ }
++\line{ --space-before-while-block \leaderfill      -sbwb\ }
++\line{ --space-before-while \leaderfill            -sbw\ }
+ \line{ --space-special-semicolon \leaderfill       -ss\ \ } 
+ \line{ --spaces-around-initializers \leaderfill    -sar\ \ }
+ \line{ --standard-output \leaderfill      -st\ \ } 
+@@ -2524,7 +2724,17 @@ the corresponding short option.
+ --no-space-after-if				-nsai
+ --no-space-after-parentheses                    -nprs
+ --no-space-after-while				-nsaw
++--no-space-after-do                             -nsad
++--no-space-after-else                           -nsae
++--no-space-after-func-def                       -nsafd
+ --no-space-after-switch			    -nsas
++--no-space-before-brace                         -nsbb
++--no-space-before-else                          -nsbe
++--no-space-before-for-block                     -nsbfb
++--no-space-before-if-block                      -nsbib
++--no-space-before-switch-block                  -nsbsb
++--no-space-before-while-block                   -nsbwb
++--no-space-before-while                         -nsbw
+ --no-tabs                                       -nut
+ --no-verbosity                                  -nv             
+ --original                                      -orig
+@@ -2541,7 +2751,17 @@ the corresponding short option.
+ --space-after-parentheses                       -prs
+ --space-after-procedure-calls                   -pcs            
+ --space-after-while				-saw
++--space-after-do                                -sad
++--space-after-else                              -sae
++--space-after-func-def                          -safd
+ --space-after-switch			-sas
++--space-before-brace                            -sbb
++--space-before-else                             -sbe
++--space-before-for-block                        -sbfb
++--space-before-if-block                         -sbib
++--space-before-switch-block                     -sbsb
++--space-before-while-block                      -sbwb
++--space-before-while                            -sbw
+ --space-special-semicolon                       -ss             
+ --spaces-around-initializers                    -sar
+ --standard-output                               -st             
+diff --git a/man/indent.1 b/man/indent.1
+index f5bf08a..87185ab 100644
+--- a/man/indent.1
++++ b/man/indent.1
+@@ -367,11 +367,61 @@ Do not put a space after every \fBwhile\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -nsad\fR, \fB--no-space-after-do\fR
++Do not put a space after every \fBdo\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsae\fR, \fB--no-space-after-else\fR
++Do not put a space after every \fBelse\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsafd\fR, \fB--no-space-after-func-def\fR
++Do not put a space after every function definition.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -nsas\fR, \fB--no-space-after-switch\fR
+ Do not put a space after every \fBswitch\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -nsbb\fR, \fB--no-space-before-brace\fR
++Do not put a space before every \(oq{\(cq.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbe\fR, \fB--no-space-before-else\fR
++Do not put a space before every \fBelse\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbfb\fR, \fB--no-space-before-for-block\fR
++Do not put a space before every \fBfor\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbib\fR, \fB--no-space-before-if-block\fR
++Do not put a space before every \fBif\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbsb\fR, \fB--no-space-before-switch-block\fR
++Do not put a space before every \fBswitch\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbwb\fR, \fB--no-space-before-while-block\fR
++Do not put a space before every \fBwhile\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -nsbw\fR, \fB--no-space-before-while\fR
++Do not put a space before every \fBwhile\fR in \fBdo\fR-\fBblock\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -nsc\fR, \fB--dont-star-comments\fR
+ Do not put the \(oq*\(cq character at the left of comments.
+ .br
+@@ -467,11 +517,61 @@ Put a space after each \fBwhile\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -sad\fR, \fB--space-after-do\fR
++Put a space after every \fBdo\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sae\fR, \fB--space-after-else\fR
++Put a space after every \fBelse\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -safd\fR, \fB--space-after-func-def\fR
++Put a space after every function definition.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -sas\fR, \fB--space-after-switch\fR
+ Put a space after each \fBswitch\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -sbb\fR, \fB--space-before-brace\fR
++Put a space before every \(oq{\(cq.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbe\fR, \fB--space-before-else\fR
++Put a space before every \fBelse\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbfb\fR, \fB--space-before-for-block\fR
++Put a space before every \fBfor\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbib\fR, \fB--space-before-if-block\fR
++Put a space before every \fBif\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbsb\fR, \fB--space-before-switch-block\fR
++Put a space before every \fBswitch\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbwb\fR, \fB--space-before-while-block\fR
++Put a space before every \fBwhile\fR body block.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
++.B -sbw\fR, \fB--space-before-while\fR
++Put a space before every \fBwhile\fR in \fBdo\fR-\fBblock\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -sbi\fIn\fB\fR, \fB--struct-brace-indentation\fIn\fB\fR
+ Indent braces of a struct, union or enum N spaces.
+ .br
+@@ -709,6 +809,7 @@ error.  Option settings which correspond to the GNU style are:
+ -nbad -bap -nbc -bbo -bl -bli2 -bls -ncdb -nce -cp1 -cs -di2
+ -ndj -nfc1 -nfca -hnl -i2 -ip5 -lp -pcs -nprs -psl -saf -sai
+ -saw -nsc -nsob -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ .in -5
+ .ad
+ .fi
+@@ -731,6 +832,7 @@ of options:
+ -nbad -bap -bbo -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0
+ -cp33 -cs -d0 -di1 -nfc1 -nfca -hnl -i4 -ip0 -l75 -lp -npcs
+ -nprs -npsl -saf -sai -saw -nsc -nsob -nss -par -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ .in -5
+ .ad
+ .fi
+@@ -750,6 +852,7 @@ long option name).  This style is equivalent to the following settings:
+ -nbad -nbap -bbo -bc -br -brs -c33 -cd33 -cdb -ce -ci4 -cli0
+ -cp33 -di16 -fc1 -fca -hnl -i4 -ip4 -l75 -lp -npcs -nprs -psl
+ -saf -sai -saw -sc -nsob -nss -ts8 -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ .in -5
+ .ad
+ .fi
+@@ -764,6 +867,7 @@ This style is equivalent to the following settings:
+ -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4 
+ -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai
+ -saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1 -sas
++-sad -sae -safd -sbb -sbe -sbfb -sbib -sbsb -sbwb -sbw
+ .in -5
+ .ad
+ .fi
+@@ -1262,9 +1366,45 @@ and the following parenthesis.  This is the default.
+ The \(oq-saw\(cq option forces a space between a \fBwhile\fR
+ and the following parenthesis.  This is the default.
+ 
++The \(oq-sad\(cq option forces a space between a \fBdo\fR
++and the following \(oq{\(cq.  This is the default.
++
++The \(oq-sae\(cq option forces a space between an \fBelse\fR
++and the following \(oq{\(cq.  This is the default.
++
++The \(oq-safd\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq in a function definition statement.
++This is the default.
++
+ The \(oq-sas\(cq option forces a space between a \fBswitch\fR
+ and the following parenthesis.  This is the default.
+ 
++The \(oq-sbb\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq.  This is the default.
++
++The \(oq-sbe\(cq option forces a space between the \(oq}\(cq
++and the following \fBelse\fR.  This is the default.
++
++The \(oq-sbfb\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq in a \fBfor\fR statement.
++This is the default.
++
++The \(oq-sbib\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq in a \fBif\fR statement.
++This is the default.
++
++The \(oq-sbsb\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq in a \fBswitch\fR statement.
++This is the default.
++
++The \(oq-sbwb\(cq option forces a space between the \(oq)\(cq
++and the following \(oq{\(cq in a \fBwhile\fR statement.
++This is the default.
++
++The \(oq-sbw\(cq option forces a space between the \(oq}\(cq
++and the following \fBwhile\fR in a \fBdo\fR-\fBwhile\fR statement.
++This is the default.
++
+ The \(oq-prs\(cq option causes all parentheses to be separated with
+ a space from whatever is between them.  For example, using \(oq-prs\(cq
+ results in code like:
+@@ -2113,7 +2253,17 @@ the corresponding short option.
+ --no-space-after-if				-nsai
+ --no-space-after-parentheses                    -nprs
+ --no-space-after-while				-nsaw
++--no-space-after-do                             -nsad
++--no-space-after-else                           -nsae
++--no-space-after-func-def                       -nsafd
+ --no-space-after-switch			    -nsas
++--no-space-before-brace                         -nsbb
++--no-space-before-else                          -nsbe
++--no-space-before-for-block                     -nsbfb
++--no-space-before-if-block                      -nsbib
++--no-space-before-switch-block                  -nsbsb
++--no-space-before-while-block                   -nsbwb
++--no-space-before-while                         -nsbw
+ --no-tabs                                       -nut
+ --no-verbosity                                  -nv             
+ --original                                      -orig
+@@ -2130,7 +2280,17 @@ the corresponding short option.
+ --space-after-parentheses                       -prs
+ --space-after-procedure-calls                   -pcs            
+ --space-after-while				-saw
++--space-after-do                                -sad
++--space-after-else                              -sae
++--space-after-func-def                          -safd
+ --space-after-switch			-sas
++--space-before-brace                            -sbb
++--space-before-else                             -sbe
++--space-before-for-block                        -sbfb
++--space-before-if-block                         -sbib
++--space-before-switch-block                     -sbsb
++--space-before-while-block                      -sbwb
++--space-before-while                            -sbw
+ --space-special-semicolon                       -ss             
+ --spaces-around-initializers                    -sar
+ --standard-output                               -st             
+diff --git a/src/args.c b/src/args.c
+index c8f05e9..4f0e84b 100644
+--- a/src/args.c
++++ b/src/args.c
+@@ -87,23 +87,27 @@ RCSTAG_CC ("$Id$");
+      "-nbad\0-bap\0-nbc\0-bbo\0-hnl\0-br\0-brs\0-c33\0-cd33\0" \
+      "-ncdb\0-ce\0-ci4\0-cli0\0-d0\0-di1\0-nfc1\0-i4\0-ip0\0-l75\0-lp\0" \
+      "-npcs\0-nprs\0-npsl\0-sai\0-saf\0-saw\0-cs\0-nsc\0-nsob\0-nfca\0-cp33\0"\
+-     "-nss\0-par\0-sar\0-sas\0"
++     "-nss\0-par\0-sar\0-sas\0"\
++     "-sad\0-sae\0-safd\0-sbb\0-sbe\0-sbfb\0-sbib\0-sbsb\0-sbwb\0-sbw\0"
+ 
+ #define GNU_SETTINGS_STRING \
+      "-nbad\0-bap\0-bbo\0-hnl\0-nbc\0-bl\0-bls\0-ncdb\0-cs\0-nce\0" \
+      "-di2\0-ndj\0-nfc1\0-i2\0-ip5\0-lp\0-pcs\0-nprs\0-psl\0-nsc\0-sai\0-saf\0-saw\0-nsob\0" \
+-     "-bli2\0-cp1\0-nfca\0-sas\0"
++     "-bli2\0-cp1\0-nfca\0-sas\0"\
++     "-sad\0-sae\0-safd\0-sbb\0-sbe\0-sbfb\0-sbib\0-sbsb\0-sbwb\0-sbw\0"
+ 
+ #define ORIG_SETTINGS_STRING \
+      "-nbap\0-nbad\0-bbo\0-hnl\0-bc\0-br\0-brs\0-c33\0-cd33\0-cdb\0" \
+      "-ce\0-ci4\0-cli0\0-cp33\0-di16\0-fc1\0-fca\0-i4\0-l75\0-lp\0-npcs\0-nprs\0" \
+-     "-psl\0-sc\0-sai\0-saf\0-saw\0-nsob\0-nss\0-ts8\0-sas\0"
++     "-psl\0-sc\0-sai\0-saf\0-saw\0-nsob\0-nss\0-ts8\0-sas\0"\
++     "-sad\0-sae\0-safd\0-sbb\0-sbe\0-sbfb\0-sbib\0-sbsb\0-sbwb\0-sbw\0"
+ 
+ #define LINUX_SETTINGS_STRING \
+      "-nbad\0-bap\0-nbc\0-bbo\0-hnl\0-br\0-brs\0-c33\0-cd33\0" \
+      "-ncdb\0-ce\0-ci4\0-cli0\0-d0\0-di1\0-nfc1\0-i8\0-ip0\0-l80\0-lp\0" \
+      "-npcs\0-nprs\0-npsl\0-sai\0-saf\0-saw\0-ncs\0-nsc\0-sob\0-nfca\0-cp33\0-ss\0" \
+-     "-ts8\0-il1\0-nbs\0-sas\0"
++     "-ts8\0-il1\0-nbs\0-sas\0"\
++     "-sad\0-sae\0-safd\0-sbb\0-sbe\0-sbfb\0-sbib\0-sbsb\0-sbwb\0-sbw\0"
+ 
+ const char *settings_strings[6] = {
+ 	KR_SETTINGS_STRING,
+@@ -220,6 +224,16 @@ static int exp_ut   = 0;
+ static int exp_v    = 0;
+ static int exp_version = 0;
+ static int exp_par  = 0;
++static int exp_sad  = 0;
++static int exp_sae  = 0;
++static int exp_safd = 0;
++static int exp_sbb  = 0;
++static int exp_sbe  = 0;
++static int exp_sbfb = 0;
++static int exp_sbib = 0;
++static int exp_sbsb = 0;
++static int exp_sbwb = 0;
++static int exp_sbw  = 0;
+ static int exp_slc  = 0;
+ static int exp_as   = 0;
+ static int exp_sar  = 0;
+@@ -286,7 +300,17 @@ const pro_ty pro[] =
+     {"ss",      PRO_BOOL,                           false,       ON, &settings.space_sp_semicolon,               &exp_ss},
+     {"sob",     PRO_BOOL,                           false,       ON, &settings.swallow_optional_blanklines,      &exp_sob},
+     {"sc",      PRO_BOOL,                            true,       ON, &settings.star_comment_cont,                &exp_sc},
++    {"sbwb",    PRO_BOOL,                            true,       ON, &settings.space_before_while_block,         &exp_sbwb},
++    {"sbw" ,    PRO_BOOL,                            true,       ON, &settings.space_before_while,               &exp_sbw},
++    {"sbsb",    PRO_BOOL,                            true,       ON, &settings.space_before_switch_block,        &exp_sbsb},
++    {"sbib",    PRO_BOOL,                            true,       ON, &settings.space_before_if_block,            &exp_sbib},
+     {"sbi",     PRO_INT,                                0, ONOFF_NA, &settings.struct_brace_indent,              &exp_sbi},
++    {"sbfb",    PRO_BOOL,                            true,       ON, &settings.space_before_for_block,           &exp_sbfb},
++    {"sbe" ,    PRO_BOOL,                            true,       ON, &settings.space_before_else,                &exp_sbe},
++    {"sbb" ,    PRO_BOOL,                            true,       ON, &settings.space_before_brace,               &exp_sbb},
++    {"safd",    PRO_BOOL,                            true,       ON, &settings.space_after_func_def,             &exp_safd},
++    {"sae",     PRO_BOOL,                            true,       ON, &settings.space_after_else,                 &exp_sae},
++    {"sad",     PRO_BOOL,                            true,       ON, &settings.space_after_do,                   &exp_sad},
+     {"saw",     PRO_BOOL,                            true,       ON, &settings.space_after_while,                &exp_saw},
+     {"sai",     PRO_BOOL,                            true,       ON, &settings.space_after_if,                   &exp_sai},
+     {"saf",     PRO_BOOL,                            true,       ON, &settings.space_after_for,                  &exp_saf},
+@@ -304,10 +328,20 @@ const pro_ty pro[] =
+     {"nss",     PRO_BOOL,                           false,      OFF, &settings.space_sp_semicolon,               &exp_ss},
+     {"nsob",    PRO_BOOL,                           false,      OFF, &settings.swallow_optional_blanklines,      &exp_sob},
+     {"nsc",     PRO_BOOL,                            true,      OFF, &settings.star_comment_cont,                &exp_sc},
++    {"nsbwb",   PRO_BOOL,                           false,      OFF, &settings.space_before_while_block,         &exp_sbwb},
++    {"nsbw" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_while,               &exp_sbw},
++    {"nsbsb",   PRO_BOOL,                           false,      OFF, &settings.space_before_switch_block,        &exp_sbsb},
++    {"nsbib",   PRO_BOOL,                           false,      OFF, &settings.space_before_if_block,            &exp_sbib},
++    {"nsbfb",   PRO_BOOL,                           false,      OFF, &settings.space_before_for_block,           &exp_sbfb},
++    {"nsbe" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_else,                &exp_sbe},
++    {"nsbb" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_brace,               &exp_sbb},
+     {"nsaw",    PRO_BOOL,                            true,      OFF, &settings.space_after_while,                &exp_saw},
++    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
+     {"nsai",    PRO_BOOL,                            true,      OFF, &settings.space_after_if,                   &exp_sai},
++    {"nsafd",   PRO_BOOL,                           false,      OFF, &settings.space_after_func_def,             &exp_safd},
+     {"nsaf",    PRO_BOOL,                            true,      OFF, &settings.space_after_for,                  &exp_saf},
+-    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
++    {"nsae",    PRO_BOOL,                           false,      OFF, &settings.space_after_else,                 &exp_sae},
++    {"nsad",    PRO_BOOL,                           false,      OFF, &settings.space_after_do,                   &exp_sad},
+     {"npsl",    PRO_BOOL,                            true,      OFF, &settings.procnames_start_line,             &exp_psl},
+     {"nprs",    PRO_BOOL,                           false,      OFF, &settings.parentheses_space,                &exp_prs},
+     {"npro",    PRO_IGN,                                0, ONOFF_NA, 0,                                          &exp_pro},
+@@ -415,7 +449,17 @@ const pro_ty pro[] =
+     {"ss",      PRO_BOOL,                           false,       ON, &settings.space_sp_semicolon,               &exp_ss},
+     {"sob",     PRO_BOOL,                           false,       ON, &settings.swallow_optional_blanklines,      &exp_sob},
+     {"sc",      PRO_BOOL,                           false,       ON, &settings.star_comment_cont,                &exp_sc},
++    {"sbw" ,    PRO_BOOL,                            true,       ON, &settings.space_before_while,               &exp_sbw},
++    {"sbwb",    PRO_BOOL,                            true,       ON, &settings.space_before_while_block,         &exp_sbwb},
++    {"sbsb",    PRO_BOOL,                            true,       ON, &settings.space_before_switch_block,        &exp_sbsb},
++    {"sbib",    PRO_BOOL,                            true,       ON, &settings.space_before_if_block,            &exp_sbib},
+     {"sbi",     PRO_INT,                                0, ONOFF_NA, &settings.struct_brace_indent,              &exp_sbi},
++    {"sbfb",    PRO_BOOL,                            true,       ON, &settings.space_before_for_block,           &exp_sbfb},
++    {"sbe" ,    PRO_BOOL,                            true,       ON, &settings.space_before_else,                &exp_sbe},
++    {"sbb" ,    PRO_BOOL,                            true,       ON, &settings.space_before_brace,               &exp_sbb},
++    {"safd",    PRO_BOOL,                            true,       ON, &settings.space_after_func_def,             &exp_safd},
++    {"sae",     PRO_BOOL,                            true,       ON, &settings.space_after_else,                 &exp_sae},
++    {"sad",     PRO_BOOL,                            true,       ON, &settings.space_after_do,                   &exp_sad},
+     {"saw",     PRO_BOOL,                            true,       ON, &settings.space_after_while,                &exp_saw},
+     {"sai",     PRO_BOOL,                            true,       ON, &settings.space_after_if,                   &exp_sai},
+     {"saf",     PRO_BOOL,                            true,       ON, &settings.space_after_for,                  &exp_saf},
+@@ -434,10 +478,20 @@ const pro_ty pro[] =
+     {"nss",     PRO_BOOL,                           false,      OFF, &settings.space_sp_semicolon,               &exp_ss},
+     {"nsob",    PRO_BOOL,                           false,      OFF, &settings.swallow_optional_blanklines,      &exp_sob},
+     {"nsc",     PRO_BOOL,                           false,      OFF, &settings.star_comment_cont,                &exp_sc},
++    {"nsbwb",   PRO_BOOL,                           false,      OFF, &settings.space_before_while_block,         &exp_sbwb},
++    {"nsbw" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_while,               &exp_sbw},
++    {"nsbsb",   PRO_BOOL,                           false,      OFF, &settings.space_before_switch_block,        &exp_sbsb},
++    {"nsbib",   PRO_BOOL,                           false,      OFF, &settings.space_before_if_block,            &exp_sbib},
++    {"nsbfb",   PRO_BOOL,                           false,      OFF, &settings.space_before_for_block,           &exp_sbfb},
++    {"nsbe" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_else,                &exp_sbe},
++    {"nsbb" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_brace,               &exp_sbb},
++    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
+     {"nsaw",    PRO_BOOL,                            true,      OFF, &settings.space_after_while,                &exp_saw},
+     {"nsai",    PRO_BOOL,                            true,      OFF, &settings.space_after_if,                   &exp_sai},
++    {"nsafd",   PRO_BOOL,                           false,      OFF, &settings.space_after_func_def,             &exp_safd},
+     {"nsaf",    PRO_BOOL,                            true,      OFF, &settings.space_after_for,                  &exp_saf},
+-    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
++    {"nsae",    PRO_BOOL,                           false,      OFF, &settings.space_after_else,                 &exp_sae},
++    {"nsad",    PRO_BOOL,                           false,      OFF, &settings.space_after_do,                   &exp_sad},
+     {"npsl",    PRO_BOOL,                            true,      OFF, &settings.procnames_start_line,             &exp_psl},
+     {"nprs",    PRO_BOOL,                           false,      OFF, &settings.parentheses_space,                &exp_prs},
+     {"npro",    PRO_IGN,                                0, ONOFF_NA, 0,                                          &exp_pro},
+@@ -557,6 +611,16 @@ const long_option_conversion_ty option_conversions[] =
+     {"space-after-if",                              "sai"},
+     {"space-after-for",                             "saf"},
+     {"space-after-cast",                            "cs"},
++    {"space-after-do",                              "sad"},
++    {"space-after-else",                            "sae"},
++    {"space-after-func-def",                        "safd"},
++    {"space-before-brace",                          "sbb"},
++    {"space-before-else",                           "sbe"},
++    {"space-before-for-block",                      "sbfb"},
++    {"space-before-while",                          "sbw"},
++    {"space-before-if-block",                       "sbib"},
++    {"space-before-switch-block",                   "sbsb"},
++    {"space-before-while-block",                    "sbwb"},
+     {"remove-preprocessor-space",                   "nlps"},
+     {"procnames-start-lines",                       "psl"},
+ #ifdef PRESERVE_MTIME
+@@ -578,6 +642,17 @@ const long_option_conversion_ty option_conversions[] =
+     {"no-space-after-switch",                       "nsas"},
+     {"no-space-after-cast",                         "ncs"},
+     {"no-space-after-casts",                        "ncs"},
++    {"no-space-after-func-def",                     "nsafd"},
++    {"no-space-after-do",                           "nsad"},
++    {"no-space-after-else",                         "nsae"},
++    {"no-space-before-brace",                       "nsbb"},
++    {"no-space-before-while",                       "nsbw"},
++    {"no-space-before-else",                        "nsbe"},
++    {"no-space-before-if-block",                    "nsbib"},
++    {"no-space-before-switch-block",                "nsbsb"},
++    {"no-space-before-for-block",                   "nsbfb"},
++    {"no-space-before-while-block",                 "nsbwb"},
++    {"remove-preprocessor-space",                   "nlps"},
+     {"no-parameter-indentation",                    "nip"},
+     {"no-extra-expression-indentation",             "neei"},
+     {"no-gettext-strings",                          "ngts"},
+diff --git a/src/handletoken.c b/src/handletoken.c
+index 32a9bcf..c665f81 100644
+--- a/src/handletoken.c
++++ b/src/handletoken.c
+@@ -1144,16 +1144,47 @@ static void handle_token_lbrace(
+                 {
+                     dump_line (true, &paren_target, pbreak_line);
+                 }
+-                else
++                else if (settings.space_after_func_def)
+                 {
+                     *(e_code++) = ' ';
+                 }
+                 
+                 parser_state_tos->want_blank = false;
+             }
++            else if (parser_state_tos->last_token == sp_else)
++            {
++                parser_state_tos->want_blank = settings.space_after_else;
++            }
++            else if (parser_state_tos->last_token == sp_nparen)
++            {
++                parser_state_tos->want_blank = settings.space_after_do;
++            }
++            else if (parser_state_tos->last_token == rparen &&
++                     !parser_state_tos->in_decl &&
++                     parser_state_tos->block_init == 0)
++            {
++                switch (parser_state_tos->p_stack[parser_state_tos->tos])
++                {
++                case ifstmt:
++                    parser_state_tos->want_blank = settings.space_before_if_block;
++                    break;
++                case swstmt:
++                    parser_state_tos->want_blank = settings.space_before_switch_block;
++                    break;
++                case forstmt:
++                    parser_state_tos->want_blank = settings.space_before_for_block;
++                    break;
++                case whilestmt:
++                    parser_state_tos->want_blank = settings.space_before_while_block;
++                    break;
++                default:
++                    parser_state_tos->want_blank = settings.space_before_brace;
++                    break;
++                }
++            }
+             else
+             {
+-                parser_state_tos->want_blank = true;
++                parser_state_tos->want_blank = settings.space_before_brace;
+             }
+         }
+     }
+@@ -1434,6 +1465,15 @@ static void handle_token_sp_paren(
+     /* remember the type of header for later use by parser */
+     *hd_type =
+             (*token == 'i' ? ifstmt : (*token == 'w' ? whilestmt : forstmt));
++
++    if (!settings.space_before_while &&
++        *token == 'w' &&
++        settings.cuddle_do_while &&
++        e_code != s_code &&
++        e_code[-1] == '}')
++    {
++        parser_state_tos->want_blank = false;
++    }
+ }
+ 
+ /**
+@@ -1459,6 +1499,10 @@ static void handle_token_nparen(
+             dump_line (true, &paren_target, pbreak_line);       /* make sure this starts a line */
+             parser_state_tos->want_blank = false;
+         }
++        else if (!settings.space_before_else)
++        {
++            parser_state_tos->want_blank = false;
++        }
+         
+         /* This will be over ridden when next we read an `if' */
+         
+diff --git a/src/indent.h b/src/indent.h
+index e637c9b..d5c1cf4 100644
+--- a/src/indent.h
++++ b/src/indent.h
+@@ -260,6 +260,16 @@ typedef struct user_options_st
+     int swallow_optional_blanklines;
+     int star_comment_cont;   /*!<  true if comment continuation lines should have stars at the beginning of each line. */
+     int struct_brace_indent; /*!<  Indentation level to be used for a '{' directly following a struct, union or enum */
++    int space_after_func_def; /*!< Put a space after a function definition */
++    int space_after_do;      /*!< Put a space after `do' */
++    int space_after_else;    /*!< Put a space after `else' */
++    int space_before_brace;  /*!< Put a space before `{'. */
++    int space_before_while;  /*!< Put a space before `while' in do-while */
++    int space_before_else;   /*!< Put a space before `else' */
++    int space_before_if_block; /*!< Put a space before `{' in if */
++    int space_before_switch_block; /*!< Put a space before `{' in switch */
++    int space_before_for_block; /*!< Put a space before `{' in for */
++    int space_before_while_block; /*!< Put a space before `{' in while */
+     int space_after_while;   /*!<  Put a space after `while' */
+     int space_after_if;      /*!<  Put a space after `if' */
+     int space_after_for;     /*!<  Put a space after `for' */
+-- 
+2.49.0
+

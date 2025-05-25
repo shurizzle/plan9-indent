@@ -31,11 +31,16 @@ OFILES=\
 	parse.$O\
 	utils.$O\
 
+PATCHES=\
+	0001-fix-respect-newline-accordint-to-cdw-flag.patch\
+	0002-feat-add-no-space-after-switch-n-sas-flag.patch\
+	0003-feat-add-space-after-brace-options.patch\
+
 default:V: all
 
 all:V: $O.indent
 
-indent-$VERSION:
+indent-$VERSION: $PATCHES
 	test -d indent-$VERSION || \
 		@{hget https://ftp.gnu.org/gnu/indent/indent-$VERSION.tar.gz | \
 			gunzip -c | \
@@ -45,6 +50,10 @@ indent-$VERSION:
 			rm -rf indent-$VERSION || status=''
 			exit $s
 		}
+	for(patch in $PATCHES)@{
+		cd indent-$VERSION
+		patch -p1 ../$patch
+	}
 
 indent-$VERSION/%:Q: indent-$VERSION
 	test -e indent-$VERSION/$stem

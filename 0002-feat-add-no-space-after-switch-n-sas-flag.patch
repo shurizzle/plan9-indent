@@ -1,0 +1,329 @@
+diff --git a/doc/indent.texi b/doc/indent.texi
+index 33dff7e..b8c5dac 100644
+--- a/doc/indent.texi
++++ b/doc/indent.texi
+@@ -357,7 +357,7 @@ error.  Option settings which correspond to the GNU style are:
+ @group
+ -nbad -bap -nbc -bbo -bl -bli2 -bls -ncdb -nce -cp1 -cs -di2
+ -ndj -nfc1 -nfca -hnl -i2 -ip5 -lp -pcs -nprs -psl -saf -sai
+--saw -nsc -nsob
++-saw -nsc -nsob -sas
+ @end group
+ @end example
+ 
+@@ -382,7 +382,7 @@ of options:
+ @group
+ -nbad -bap -bbo -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0
+ -cp33 -cs -d0 -di1 -nfc1 -nfca -hnl -i4 -ip0 -l75 -lp -npcs
+--nprs -npsl -saf -sai -saw -nsc -nsob -nss -par
++-nprs -npsl -saf -sai -saw -nsc -nsob -nss -par -sas
+ @end group
+ @end example
+ 
+@@ -404,7 +404,7 @@ long option name).  This style is equivalent to the following settings:
+ @group
+ -nbad -nbap -bbo -bc -br -brs -c33 -cd33 -cdb -ce -ci4 -cli0
+ -cp33 -di16 -fc1 -fca -hnl -i4 -ip4 -l75 -lp -npcs -nprs -psl
+--saf -sai -saw -sc -nsob -nss -ts8
++-saf -sai -saw -sc -nsob -nss -ts8 -sas
+ @end group
+ @end example
+ 
+@@ -419,7 +419,7 @@ This style is equivalent to the following settings:
+ @group
+ -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4 
+ -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai
+--saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1
++-saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1 -sas
+ @end group
+ @end example
+ 
+@@ -1003,6 +1003,13 @@ and the following parenthesis.  This is the default.
+ The @option{-saw} option forces a space between a @code{while}
+ and the following parenthesis.  This is the default.
+ 
++@kindex -sas
++@kindex --space-after-switch
++@kindex -nsas
++@kindex --no-space-after-switch
++The @option{-sas} option forces a space between a @code{switch}
++and the following parenthesis.  This is the default.
++
+ @kindex -prs
+ @kindex --space-after-parentheses
+ The @option{-prs} option causes all parentheses to be separated with
+@@ -2170,6 +2177,11 @@ Do not put a space after every @code{if}.@*
+ Do not put a space after every @code{while}.@*
+ @xref{Statements}.
+ 
++@item -nsas
++@itemx --no-space-after-switch
++Do not put a space after every @code{switch}.@*
++@xref{Statements}.
++
+ @item -nsc
+ @itemx --dont-star-comments
+ Do not put the @samp{*} character at the left of comments.@*
+@@ -2273,6 +2285,11 @@ Put a space after the @samp{@{} and before the @samp{@}} in initializers.@*
+ Put a space after each @code{while}.@*
+ @xref{Statements}.
+ 
++@item -sas
++@itemx --space-after-switch
++Put a space after each @code{switch}.@*
++@xref{Statements}.
++
+ @item -sbi@var{n}
+ @itemx --struct-brace-indentation@var{n}
+ Indent braces of a struct, union or enum N spaces.@*
+@@ -2409,6 +2426,7 @@ the corresponding short option.
+ \line{ --no-space-after-if \leaderfill             -nsai}
+ \line{ --no-space-after-parentheses \leaderfill          -nprs}
+ \line{ --no-space-after-while \leaderfill             -nsaw}
++\line{ --no-space-after-switch \leaderfill            -nsas}
+ \line{ --no-tabs \leaderfill                            -nut\ \ } 
+ \line{ --no-verbosity \leaderfill                       -nv\ \ }
+ \line{ --original \leaderfill                      -orig}
+@@ -2425,6 +2443,7 @@ the corresponding short option.
+ \line{ --space-after-parentheses \leaderfill       -prs\ }
+ \line{ --space-after-procedure-calls \leaderfill   -pcs\ }  
+ \line{ --space-after-while \leaderfill             -saw\ }
++\line{ --space-after-switch \leaderfill            -sas\ }
+ \line{ --space-special-semicolon \leaderfill       -ss\ \ } 
+ \line{ --spaces-around-initializers \leaderfill    -sar\ \ }
+ \line{ --standard-output \leaderfill      -st\ \ } 
+@@ -2505,6 +2524,7 @@ the corresponding short option.
+ --no-space-after-if				-nsai
+ --no-space-after-parentheses                    -nprs
+ --no-space-after-while				-nsaw
++--no-space-after-switch			    -nsas
+ --no-tabs                                       -nut
+ --no-verbosity                                  -nv             
+ --original                                      -orig
+@@ -2521,6 +2541,7 @@ the corresponding short option.
+ --space-after-parentheses                       -prs
+ --space-after-procedure-calls                   -pcs            
+ --space-after-while				-saw
++--space-after-switch			-sas
+ --space-special-semicolon                       -ss             
+ --spaces-around-initializers                    -sar
+ --standard-output                               -st             
+diff --git a/man/indent.1 b/man/indent.1
+index 2ba1fa8..f5bf08a 100644
+--- a/man/indent.1
++++ b/man/indent.1
+@@ -367,6 +367,11 @@ Do not put a space after every \fBwhile\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -nsas\fR, \fB--no-space-after-switch\fR
++Do not put a space after every \fBswitch\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -nsc\fR, \fB--dont-star-comments\fR
+ Do not put the \(oq*\(cq character at the left of comments.
+ .br
+@@ -462,6 +467,11 @@ Put a space after each \fBwhile\fR.
+ .br
+ See \fB\ STATEMENTS\fR.
+ .TP
++.B -sas\fR, \fB--space-after-switch\fR
++Put a space after each \fBswitch\fR.
++.br
++See \fB\ STATEMENTS\fR.
++.TP
+ .B -sbi\fIn\fB\fR, \fB--struct-brace-indentation\fIn\fB\fR
+ Indent braces of a struct, union or enum N spaces.
+ .br
+@@ -698,7 +708,7 @@ error.  Option settings which correspond to the GNU style are:
+ .na
+ -nbad -bap -nbc -bbo -bl -bli2 -bls -ncdb -nce -cp1 -cs -di2
+ -ndj -nfc1 -nfca -hnl -i2 -ip5 -lp -pcs -nprs -psl -saf -sai
+--saw -nsc -nsob
++-saw -nsc -nsob -sas
+ .in -5
+ .ad
+ .fi
+@@ -720,7 +730,7 @@ of options:
+ .na
+ -nbad -bap -bbo -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0
+ -cp33 -cs -d0 -di1 -nfc1 -nfca -hnl -i4 -ip0 -l75 -lp -npcs
+--nprs -npsl -saf -sai -saw -nsc -nsob -nss -par
++-nprs -npsl -saf -sai -saw -nsc -nsob -nss -par -sas
+ .in -5
+ .ad
+ .fi
+@@ -739,7 +749,7 @@ long option name).  This style is equivalent to the following settings:
+ .na
+ -nbad -nbap -bbo -bc -br -brs -c33 -cd33 -cdb -ce -ci4 -cli0
+ -cp33 -di16 -fc1 -fca -hnl -i4 -ip4 -l75 -lp -npcs -nprs -psl
+--saf -sai -saw -sc -nsob -nss -ts8
++-saf -sai -saw -sc -nsob -nss -ts8 -sas
+ .in -5
+ .ad
+ .fi
+@@ -753,7 +763,7 @@ This style is equivalent to the following settings:
+ .na
+ -nbad -bap -nbc -bbo -hnl -br -brs -c33 -cd33 -ncdb -ce -ci4 
+ -cli0 -d0 -di1 -nfc1 -i8 -ip0 -l80 -lp -npcs -nprs -npsl -sai
+--saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1
++-saf -saw -ncs -nsc -sob -nfca -cp33 -ss -ts8 -il1 -sas
+ .in -5
+ .ad
+ .fi
+@@ -1252,6 +1262,9 @@ and the following parenthesis.  This is the default.
+ The \(oq-saw\(cq option forces a space between a \fBwhile\fR
+ and the following parenthesis.  This is the default.
+ 
++The \(oq-sas\(cq option forces a space between a \fBswitch\fR
++and the following parenthesis.  This is the default.
++
+ The \(oq-prs\(cq option causes all parentheses to be separated with
+ a space from whatever is between them.  For example, using \(oq-prs\(cq
+ results in code like:
+@@ -2100,6 +2113,7 @@ the corresponding short option.
+ --no-space-after-if				-nsai
+ --no-space-after-parentheses                    -nprs
+ --no-space-after-while				-nsaw
++--no-space-after-switch			    -nsas
+ --no-tabs                                       -nut
+ --no-verbosity                                  -nv             
+ --original                                      -orig
+@@ -2116,6 +2130,7 @@ the corresponding short option.
+ --space-after-parentheses                       -prs
+ --space-after-procedure-calls                   -pcs            
+ --space-after-while				-saw
++--space-after-switch			-sas
+ --space-special-semicolon                       -ss             
+ --spaces-around-initializers                    -sar
+ --standard-output                               -st             
+diff --git a/src/args.c b/src/args.c
+index 7f20b5e..c8f05e9 100644
+--- a/src/args.c
++++ b/src/args.c
+@@ -87,23 +87,23 @@ RCSTAG_CC ("$Id$");
+      "-nbad\0-bap\0-nbc\0-bbo\0-hnl\0-br\0-brs\0-c33\0-cd33\0" \
+      "-ncdb\0-ce\0-ci4\0-cli0\0-d0\0-di1\0-nfc1\0-i4\0-ip0\0-l75\0-lp\0" \
+      "-npcs\0-nprs\0-npsl\0-sai\0-saf\0-saw\0-cs\0-nsc\0-nsob\0-nfca\0-cp33\0"\
+-     "-nss\0-par\0-sar\0"
++     "-nss\0-par\0-sar\0-sas\0"
+ 
+ #define GNU_SETTINGS_STRING \
+      "-nbad\0-bap\0-bbo\0-hnl\0-nbc\0-bl\0-bls\0-ncdb\0-cs\0-nce\0" \
+      "-di2\0-ndj\0-nfc1\0-i2\0-ip5\0-lp\0-pcs\0-nprs\0-psl\0-nsc\0-sai\0-saf\0-saw\0-nsob\0" \
+-     "-bli2\0-cp1\0-nfca\0"
++     "-bli2\0-cp1\0-nfca\0-sas\0"
+ 
+ #define ORIG_SETTINGS_STRING \
+      "-nbap\0-nbad\0-bbo\0-hnl\0-bc\0-br\0-brs\0-c33\0-cd33\0-cdb\0" \
+      "-ce\0-ci4\0-cli0\0-cp33\0-di16\0-fc1\0-fca\0-i4\0-l75\0-lp\0-npcs\0-nprs\0" \
+-     "-psl\0-sc\0-sai\0-saf\0-saw\0-nsob\0-nss\0-ts8\0"
++     "-psl\0-sc\0-sai\0-saf\0-saw\0-nsob\0-nss\0-ts8\0-sas\0"
+ 
+ #define LINUX_SETTINGS_STRING \
+      "-nbad\0-bap\0-nbc\0-bbo\0-hnl\0-br\0-brs\0-c33\0-cd33\0" \
+      "-ncdb\0-ce\0-ci4\0-cli0\0-d0\0-di1\0-nfc1\0-i8\0-ip0\0-l80\0-lp\0" \
+      "-npcs\0-nprs\0-npsl\0-sai\0-saf\0-saw\0-ncs\0-nsc\0-sob\0-nfca\0-cp33\0-ss\0" \
+-     "-ts8\0-il1\0-nbs\0"
++     "-ts8\0-il1\0-nbs\0-sas\0"
+ 
+ const char *settings_strings[6] = {
+ 	KR_SETTINGS_STRING,
+@@ -209,6 +209,7 @@ static int exp_ppi  = 0;  /*!< force preprocessor indent at width... */
+ static int exp_sai  = 0;
+ static int exp_saf  = 0;
+ static int exp_saw  = 0;
++static int exp_sas  = 0;
+ static int exp_sbi  = 0;
+ static int exp_sc   = 0;
+ static int exp_sob  = 0;
+@@ -289,6 +290,7 @@ const pro_ty pro[] =
+     {"saw",     PRO_BOOL,                            true,       ON, &settings.space_after_while,                &exp_saw},
+     {"sai",     PRO_BOOL,                            true,       ON, &settings.space_after_if,                   &exp_sai},
+     {"saf",     PRO_BOOL,                            true,       ON, &settings.space_after_for,                  &exp_saf},
++    {"sas",     PRO_BOOL,                            true,       ON, &settings.space_after_switch,               &exp_sas},
+     {"psl",     PRO_BOOL,                            true,       ON, &settings.procnames_start_line,             &exp_psl},
+     {"prs",     PRO_BOOL,                           false,       ON, &settings.parentheses_space,                &exp_prs},
+ #ifdef PRESERVE_MTIME
+@@ -305,6 +307,7 @@ const pro_ty pro[] =
+     {"nsaw",    PRO_BOOL,                            true,      OFF, &settings.space_after_while,                &exp_saw},
+     {"nsai",    PRO_BOOL,                            true,      OFF, &settings.space_after_if,                   &exp_sai},
+     {"nsaf",    PRO_BOOL,                            true,      OFF, &settings.space_after_for,                  &exp_saf},
++    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
+     {"npsl",    PRO_BOOL,                            true,      OFF, &settings.procnames_start_line,             &exp_psl},
+     {"nprs",    PRO_BOOL,                           false,      OFF, &settings.parentheses_space,                &exp_prs},
+     {"npro",    PRO_IGN,                                0, ONOFF_NA, 0,                                          &exp_pro},
+@@ -416,6 +419,7 @@ const pro_ty pro[] =
+     {"saw",     PRO_BOOL,                            true,       ON, &settings.space_after_while,                &exp_saw},
+     {"sai",     PRO_BOOL,                            true,       ON, &settings.space_after_if,                   &exp_sai},
+     {"saf",     PRO_BOOL,                            true,       ON, &settings.space_after_for,                  &exp_saf},
++    {"sas",     PRO_BOOL,                            true,       ON, &settings.space_after_switch,               &exp_sas},
+     {"psl",     PRO_BOOL,                            true,       ON, &settings.procnames_start_line,             &exp_psl},
+     {"prs",     PRO_BOOL,                           false,       ON, &settings.parentheses_space,                &exp_prs},
+ #ifdef PRESERVE_MTIME
+@@ -433,6 +437,7 @@ const pro_ty pro[] =
+     {"nsaw",    PRO_BOOL,                            true,      OFF, &settings.space_after_while,                &exp_saw},
+     {"nsai",    PRO_BOOL,                            true,      OFF, &settings.space_after_if,                   &exp_sai},
+     {"nsaf",    PRO_BOOL,                            true,      OFF, &settings.space_after_for,                  &exp_saf},
++    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
+     {"npsl",    PRO_BOOL,                            true,      OFF, &settings.procnames_start_line,             &exp_psl},
+     {"nprs",    PRO_BOOL,                           false,      OFF, &settings.parentheses_space,                &exp_prs},
+     {"npro",    PRO_IGN,                                0, ONOFF_NA, 0,                                          &exp_pro},
+@@ -546,6 +551,7 @@ const long_option_conversion_ty option_conversions[] =
+     {"standard-output",                             "st"},
+     {"space-special-semicolon",                     "ss"},
+     {"space-after-while",                           "saw"},
++    {"space-after-switch",                          "sas"},
+     {"space-after-procedure-calls",                 "pcs"},
+     {"space-after-parentheses",                     "prs"},
+     {"space-after-if",                              "sai"},
+@@ -569,6 +575,7 @@ const long_option_conversion_ty option_conversions[] =
+     {"no-space-after-if",                           "nsai"},
+     {"no-space-after-function-call-names",          "npcs"},
+     {"no-space-after-for",                          "nsaf"},
++    {"no-space-after-switch",                       "nsas"},
+     {"no-space-after-cast",                         "ncs"},
+     {"no-space-after-casts",                        "ncs"},
+     {"no-parameter-indentation",                    "nip"},
+diff --git a/src/handletoken.c b/src/handletoken.c
+index e45495a..32a9bcf 100644
+--- a/src/handletoken.c
++++ b/src/handletoken.c
+@@ -167,12 +167,15 @@ static void copy_id(
+ 
+     parser_state_tos->want_blank = true;
+ 
+-    /* Handle the options -nsaf, -nsai and -nsaw */
+-
+-    if ((type_code == sp_paren) &&
+-        ((!settings.space_after_if && (*token == 'i')) ||
+-         (!settings.space_after_for && (*token == 'f')) ||
+-         (!settings.space_after_while && (*token == 'w'))))
++    /* Handle the options -nsaf, -nsai, -nsaw and -nsas */
++
++    if (((type_code == sp_paren) &&
++         ((!settings.space_after_if && (*token == 'i')) ||
++          (!settings.space_after_for && (*token == 'f')) ||
++          (!settings.space_after_while && (*token == 'w')))) ||
++        (type_code == swstmt &&
++         !settings.space_after_switch &&
++         *token == 's'))
+     {
+         parser_state_tos->want_blank = false;
+     }
+diff --git a/src/indent.h b/src/indent.h
+index d77c227..e637c9b 100644
+--- a/src/indent.h
++++ b/src/indent.h
+@@ -263,6 +263,7 @@ typedef struct user_options_st
+     int space_after_while;   /*!<  Put a space after `while' */
+     int space_after_if;      /*!<  Put a space after `if' */
+     int space_after_for;     /*!<  Put a space after `for' */
++    int space_after_switch;  /*!<  Put a space after `switch' */
+     int procnames_start_line; /*!<  if true, the names of procedures being  defined get placed in column 1 (ie. a
+                                * newline is placed between the type of the procedure and its name) */
+     int parentheses_space;   /*!<  If true, parentheses will look like: ( foo ) rather than (foo) */
+-- 
+2.49.0
+
