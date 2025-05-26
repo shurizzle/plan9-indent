@@ -1,5 +1,5 @@
 diff --git a/doc/indent.texi b/doc/indent.texi
-index 33dff7e..52620da 100644
+index 4e920f2..f519733 100644
 --- a/doc/indent.texi
 +++ b/doc/indent.texi
 @@ -357,7 +357,7 @@ error.  Option settings which correspond to the GNU style are:
@@ -93,23 +93,23 @@ index 33dff7e..52620da 100644
  \line{ --spaces-around-initializers \leaderfill    -sar\ \ }
  \line{ --standard-output \leaderfill      -st\ \ } 
 @@ -2505,6 +2524,7 @@ the corresponding short option.
- --no-space-after-if				-nsai
+ --no-space-after-if                             -nsai
  --no-space-after-parentheses                    -nprs
- --no-space-after-while				-nsaw
-+--no-space-after-switch				-nsas
+ --no-space-after-while                          -nsaw
++--no-space-after-switch                         -nsas
  --no-tabs                                       -nut
- --no-verbosity                                  -nv             
+ --no-verbosity                                  -nv
  --original                                      -orig
 @@ -2521,6 +2541,7 @@ the corresponding short option.
  --space-after-parentheses                       -prs
- --space-after-procedure-calls                   -pcs            
- --space-after-while				-saw
-+--space-after-switch				-sas
- --space-special-semicolon                       -ss             
+ --space-after-procedure-calls                   -pcs
+ --space-after-while                             -saw
++--space-after-switch                            -sas
+ --space-special-semicolon                       -ss
  --spaces-around-initializers                    -sar
- --standard-output                               -st             
+ --standard-output                               -st
 diff --git a/man/indent.1 b/man/indent.1
-index 2ba1fa8..68aa78f 100644
+index 5088a76..feefe32 100644
 --- a/man/indent.1
 +++ b/man/indent.1
 @@ -367,6 +367,11 @@ Do not put a space after every \fBwhile\fR.
@@ -183,21 +183,21 @@ index 2ba1fa8..68aa78f 100644
  a space from whatever is between them.  For example, using \(oq-prs\(cq
  results in code like:
 @@ -2100,6 +2113,7 @@ the corresponding short option.
- --no-space-after-if				-nsai
+ --no-space-after-if                             -nsai
  --no-space-after-parentheses                    -nprs
- --no-space-after-while				-nsaw
-+--no-space-after-switch				-nsas
+ --no-space-after-while                          -nsaw
++--no-space-after-switch                         -nsas
  --no-tabs                                       -nut
- --no-verbosity                                  -nv             
+ --no-verbosity                                  -nv
  --original                                      -orig
 @@ -2116,6 +2130,7 @@ the corresponding short option.
  --space-after-parentheses                       -prs
- --space-after-procedure-calls                   -pcs            
- --space-after-while				-saw
-+--space-after-switch				-sas
- --space-special-semicolon                       -ss             
+ --space-after-procedure-calls                   -pcs
+ --space-after-while                             -saw
++--space-after-switch                            -sas
+ --space-special-semicolon                       -ss
  --spaces-around-initializers                    -sar
- --standard-output                               -st             
+ --standard-output                               -st
 diff --git a/src/args.c b/src/args.c
 index 7f20b5e..c8f05e9 100644
 --- a/src/args.c

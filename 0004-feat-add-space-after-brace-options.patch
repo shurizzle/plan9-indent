@@ -1,5 +1,5 @@
 diff --git a/doc/indent.texi b/doc/indent.texi
-index 52620da..ccc919f 100644
+index f519733..cc6555b 100644
 --- a/doc/indent.texi
 +++ b/doc/indent.texi
 @@ -358,6 +358,7 @@ error.  Option settings which correspond to the GNU style are:
@@ -284,14 +284,13 @@ index 52620da..ccc919f 100644
  \line{ --space-special-semicolon \leaderfill       -ss\ \ } 
  \line{ --spaces-around-initializers \leaderfill    -sar\ \ }
  \line{ --standard-output \leaderfill      -st\ \ } 
-@@ -2524,7 +2724,17 @@ the corresponding short option.
- --no-space-after-if				-nsai
+@@ -2525,6 +2725,16 @@ the corresponding short option.
  --no-space-after-parentheses                    -nprs
- --no-space-after-while				-nsaw
+ --no-space-after-while                          -nsaw
+ --no-space-after-switch                         -nsas
 +--no-space-after-do                             -nsad
 +--no-space-after-else                           -nsae
 +--no-space-after-func-def                       -nsafd
- --no-space-after-switch				-nsas
 +--no-space-before-brace                         -nsbb
 +--no-space-before-else                          -nsbe
 +--no-space-before-for-block                     -nsbfb
@@ -300,16 +299,16 @@ index 52620da..ccc919f 100644
 +--no-space-before-while-block                   -nsbwb
 +--no-space-before-while                         -nsbw
  --no-tabs                                       -nut
- --no-verbosity                                  -nv             
+ --no-verbosity                                  -nv
  --original                                      -orig
 @@ -2541,7 +2751,17 @@ the corresponding short option.
  --space-after-parentheses                       -prs
- --space-after-procedure-calls                   -pcs            
- --space-after-while				-saw
+ --space-after-procedure-calls                   -pcs
+ --space-after-while                             -saw
 +--space-after-do                                -sad
 +--space-after-else                              -sae
 +--space-after-func-def                          -safd
- --space-after-switch				-sas
+ --space-after-switch                            -sas
 +--space-before-brace                            -sbb
 +--space-before-else                             -sbe
 +--space-before-for-block                        -sbfb
@@ -317,11 +316,11 @@ index 52620da..ccc919f 100644
 +--space-before-switch-block                     -sbsb
 +--space-before-while-block                      -sbwb
 +--space-before-while                            -sbw
- --space-special-semicolon                       -ss             
+ --space-special-semicolon                       -ss
  --spaces-around-initializers                    -sar
- --standard-output                               -st             
+ --standard-output                               -st
 diff --git a/man/indent.1 b/man/indent.1
-index 68aa78f..0da18f4 100644
+index feefe32..98ec392 100644
 --- a/man/indent.1
 +++ b/man/indent.1
 @@ -367,11 +367,61 @@ Do not put a space after every \fBwhile\fR.
@@ -526,14 +525,13 @@ index 68aa78f..0da18f4 100644
  The \(oq-prs\(cq option causes all parentheses to be separated with
  a space from whatever is between them.  For example, using \(oq-prs\(cq
  results in code like:
-@@ -2113,7 +2253,17 @@ the corresponding short option.
- --no-space-after-if				-nsai
+@@ -2114,6 +2254,16 @@ the corresponding short option.
  --no-space-after-parentheses                    -nprs
- --no-space-after-while				-nsaw
+ --no-space-after-while                          -nsaw
+ --no-space-after-switch                         -nsas
 +--no-space-after-do                             -nsad
 +--no-space-after-else                           -nsae
 +--no-space-after-func-def                       -nsafd
- --no-space-after-switch				-nsas
 +--no-space-before-brace                         -nsbb
 +--no-space-before-else                          -nsbe
 +--no-space-before-for-block                     -nsbfb
@@ -542,16 +540,16 @@ index 68aa78f..0da18f4 100644
 +--no-space-before-while-block                   -nsbwb
 +--no-space-before-while                         -nsbw
  --no-tabs                                       -nut
- --no-verbosity                                  -nv             
+ --no-verbosity                                  -nv
  --original                                      -orig
 @@ -2130,7 +2280,17 @@ the corresponding short option.
  --space-after-parentheses                       -prs
- --space-after-procedure-calls                   -pcs            
- --space-after-while				-saw
+ --space-after-procedure-calls                   -pcs
+ --space-after-while                             -saw
 +--space-after-do                                -sad
 +--space-after-else                              -sae
 +--space-after-func-def                          -safd
- --space-after-switch				-sas
+ --space-after-switch                            -sas
 +--space-before-brace                            -sbb
 +--space-before-else                             -sbe
 +--space-before-for-block                        -sbfb
@@ -559,9 +557,9 @@ index 68aa78f..0da18f4 100644
 +--space-before-switch-block                     -sbsb
 +--space-before-while-block                      -sbwb
 +--space-before-while                            -sbw
- --space-special-semicolon                       -ss             
+ --space-special-semicolon                       -ss
  --spaces-around-initializers                    -sar
- --standard-output                               -st             
+ --standard-output                               -st
 diff --git a/src/args.c b/src/args.c
 index c8f05e9..314d2ea 100644
 --- a/src/args.c

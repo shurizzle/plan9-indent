@@ -32,9 +32,10 @@ OFILES=\
 	utils.$O\
 
 PATCHES=\
-	0001-fix-respect-newline-accordint-to-cdw-flag.patch\
-	0002-feat-add-no-space-after-switch-n-sas-flag.patch\
-	0003-feat-add-space-after-brace-options.patch\
+	0001-fix-replace-tabs-with-space-in-man-examples.patch\
+	0002-fix-respect-newline-accordint-to-cdw-flag.patch\
+	0003-feat-add-no-space-after-switch-n-sas-flag.patch\
+	0004-feat-add-space-after-brace-options.patch\
 
 default:V: all
 
