@@ -1,5 +1,5 @@
 diff --git a/doc/indent.texi b/doc/indent.texi
-index 33dff7e..b8c5dac 100644
+index 33dff7e..52620da 100644
 --- a/doc/indent.texi
 +++ b/doc/indent.texi
 @@ -357,7 +357,7 @@ error.  Option settings which correspond to the GNU style are:
@@ -96,7 +96,7 @@ index 33dff7e..b8c5dac 100644
  --no-space-after-if				-nsai
  --no-space-after-parentheses                    -nprs
  --no-space-after-while				-nsaw
-+--no-space-after-switch			    -nsas
++--no-space-after-switch				-nsas
  --no-tabs                                       -nut
  --no-verbosity                                  -nv             
  --original                                      -orig
@@ -104,12 +104,12 @@ index 33dff7e..b8c5dac 100644
  --space-after-parentheses                       -prs
  --space-after-procedure-calls                   -pcs            
  --space-after-while				-saw
-+--space-after-switch			-sas
++--space-after-switch				-sas
  --space-special-semicolon                       -ss             
  --spaces-around-initializers                    -sar
  --standard-output                               -st             
 diff --git a/man/indent.1 b/man/indent.1
-index 2ba1fa8..f5bf08a 100644
+index 2ba1fa8..68aa78f 100644
 --- a/man/indent.1
 +++ b/man/indent.1
 @@ -367,6 +367,11 @@ Do not put a space after every \fBwhile\fR.
@@ -186,7 +186,7 @@ index 2ba1fa8..f5bf08a 100644
  --no-space-after-if				-nsai
  --no-space-after-parentheses                    -nprs
  --no-space-after-while				-nsaw
-+--no-space-after-switch			    -nsas
++--no-space-after-switch				-nsas
  --no-tabs                                       -nut
  --no-verbosity                                  -nv             
  --original                                      -orig
@@ -194,7 +194,7 @@ index 2ba1fa8..f5bf08a 100644
  --space-after-parentheses                       -prs
  --space-after-procedure-calls                   -pcs            
  --space-after-while				-saw
-+--space-after-switch			-sas
++--space-after-switch				-sas
  --space-special-semicolon                       -ss             
  --spaces-around-initializers                    -sar
  --standard-output                               -st             
@@ -324,6 +324,3 @@ index d77c227..e637c9b 100644
      int procnames_start_line; /*!<  if true, the names of procedures being  defined get placed in column 1 (ie. a
                                 * newline is placed between the type of the procedure and its name) */
      int parentheses_space;   /*!<  If true, parentheses will look like: ( foo ) rather than (foo) */
--- 
-2.49.0
-

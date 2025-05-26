@@ -1,5 +1,5 @@
 diff --git a/doc/indent.texi b/doc/indent.texi
-index b8c5dac..549f070 100644
+index 52620da..ccc919f 100644
 --- a/doc/indent.texi
 +++ b/doc/indent.texi
 @@ -358,6 +358,7 @@ error.  Option settings which correspond to the GNU style are:
@@ -291,7 +291,7 @@ index b8c5dac..549f070 100644
 +--no-space-after-do                             -nsad
 +--no-space-after-else                           -nsae
 +--no-space-after-func-def                       -nsafd
- --no-space-after-switch			    -nsas
+ --no-space-after-switch				-nsas
 +--no-space-before-brace                         -nsbb
 +--no-space-before-else                          -nsbe
 +--no-space-before-for-block                     -nsbfb
@@ -309,7 +309,7 @@ index b8c5dac..549f070 100644
 +--space-after-do                                -sad
 +--space-after-else                              -sae
 +--space-after-func-def                          -safd
- --space-after-switch			-sas
+ --space-after-switch				-sas
 +--space-before-brace                            -sbb
 +--space-before-else                             -sbe
 +--space-before-for-block                        -sbfb
@@ -321,7 +321,7 @@ index b8c5dac..549f070 100644
  --spaces-around-initializers                    -sar
  --standard-output                               -st             
 diff --git a/man/indent.1 b/man/indent.1
-index f5bf08a..87185ab 100644
+index 68aa78f..0da18f4 100644
 --- a/man/indent.1
 +++ b/man/indent.1
 @@ -367,11 +367,61 @@ Do not put a space after every \fBwhile\fR.
@@ -533,7 +533,7 @@ index f5bf08a..87185ab 100644
 +--no-space-after-do                             -nsad
 +--no-space-after-else                           -nsae
 +--no-space-after-func-def                       -nsafd
- --no-space-after-switch			    -nsas
+ --no-space-after-switch				-nsas
 +--no-space-before-brace                         -nsbb
 +--no-space-before-else                          -nsbe
 +--no-space-before-for-block                     -nsbfb
@@ -551,7 +551,7 @@ index f5bf08a..87185ab 100644
 +--space-after-do                                -sad
 +--space-after-else                              -sae
 +--space-after-func-def                          -safd
- --space-after-switch			-sas
+ --space-after-switch				-sas
 +--space-before-brace                            -sbb
 +--space-before-else                             -sbe
 +--space-before-for-block                        -sbfb
@@ -563,7 +563,7 @@ index f5bf08a..87185ab 100644
  --spaces-around-initializers                    -sar
  --standard-output                               -st             
 diff --git a/src/args.c b/src/args.c
-index c8f05e9..4f0e84b 100644
+index c8f05e9..314d2ea 100644
 --- a/src/args.c
 +++ b/src/args.c
 @@ -87,23 +87,27 @@ RCSTAG_CC ("$Id$");
@@ -684,8 +684,8 @@ index c8f05e9..4f0e84b 100644
 +    {"nsbfb",   PRO_BOOL,                           false,      OFF, &settings.space_before_for_block,           &exp_sbfb},
 +    {"nsbe" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_else,                &exp_sbe},
 +    {"nsbb" ,   PRO_BOOL,                           false,      OFF, &settings.space_before_brace,               &exp_sbb},
-+    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
      {"nsaw",    PRO_BOOL,                            true,      OFF, &settings.space_after_while,                &exp_saw},
++    {"nsas",    PRO_BOOL,                            true,      OFF, &settings.space_after_switch,               &exp_sas},
      {"nsai",    PRO_BOOL,                            true,      OFF, &settings.space_after_if,                   &exp_sai},
 +    {"nsafd",   PRO_BOOL,                           false,      OFF, &settings.space_after_func_def,             &exp_safd},
      {"nsaf",    PRO_BOOL,                            true,      OFF, &settings.space_after_for,                  &exp_saf},
@@ -832,6 +832,3 @@ index e637c9b..d5c1cf4 100644
      int space_after_while;   /*!<  Put a space after `while' */
      int space_after_if;      /*!<  Put a space after `if' */
      int space_after_for;     /*!<  Put a space after `for' */
--- 
-2.49.0
-
